@@ -1,0 +1,9 @@
+[Core]
+Name = TCS
+Module = tcs
+
+[Python]
+Version = 2+
+
+[Documentation]
+Description = TCS bot
