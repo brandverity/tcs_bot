@@ -8,13 +8,11 @@ ALL_USERS = 'ALL_USERS'
 CONFIRMED = 'confirmed'
 OPTED_OUT = 'opted_out'
 
-sheet_link = "https://docs.google.com/spreadsheets/d/11wPxRPMISPTN5BXVuwDempnUJXZPzS9lfJEoD139DwY/pub?gid=0&single=true&output=csv"
-
 class TCS(BotPlugin):
     CONFIG_TEMPLATE = {
-    ALL_USERS: ','.join([
-        'alexs',
-    ]),
+        ALL_USERS: ','.join([
+            'alexs',
+        ]),
     }
     
     def activate(self):
@@ -47,20 +45,18 @@ class TCS(BotPlugin):
             
     @botcmd
     def tcs_ask(self, msg, args):
+        link = args
         users = self.get_missing_rsvps()
         for user in users:
-            self._ask_user_to_confirm(user)
+            self._ask_user_to_confirm(user, link)
 
         return "Asked {} to confirm.".format(", ".join(users))
 
-    def _ask_user_to_confirm(self, user):
+    def _ask_user_to_confirm(self, user, sheet_link):
         user_id = self._build_id(user)
         message = """It's time for TCS! If your order is correct please reply with `!tcs_in`, if you would like to opt-out this week reply with `!tcs_out`.
 Order sheet: {}""".format(sheet_link)
-        self.send(
-                user_id,
-                message
-            )
+        self.send(user_id, message)
 
     @botcmd
     def tcs_in(self, msg, args):
