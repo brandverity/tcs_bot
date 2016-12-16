@@ -22,13 +22,17 @@ class TCS(BotPlugin):
         super().activate()
 
         # init persistent storage, chance to set things up the first time the plugin is activated
-        self._reset_store()
+        self._setup_store()
 
-    def _reset_store(self):
+    def _setup_store(self):
         if CONFIRMED not in self:
             self[CONFIRMED] = []
         if OPTED_OUT not in self:
             self[OPTED_OUT] = []
+
+    def _reset_store(self):
+        self[CONFIRMED] = []
+        self[OPTED_OUT] = []
 
     @property
     def all_users(self):
