@@ -45,6 +45,7 @@ class TCS(BotPlugin):
             
     @botcmd
     def food_ask(self, msg, args):
+        self._reset_store()
         link = args
         users = self.get_missing_rsvps()
         for user in users:
