@@ -44,7 +44,7 @@ class TCS(BotPlugin):
         ]
             
     @botcmd
-    def tcs_ask(self, msg, args):
+    def food_ask(self, msg, args):
         link = args
         users = self.get_missing_rsvps()
         for user in users:
@@ -54,26 +54,26 @@ class TCS(BotPlugin):
 
     def _ask_user_to_confirm(self, user, sheet_link):
         user_id = self._build_id(user)
-        message = """It's time for TCS! If your order is correct please reply with `!tcs_in`, if you would like to opt-out this week reply with `!tcs_out`.
+        message = """It's time for Team Lunch! If your order is correct please reply with `!food_in`, if you would like to opt-out this week reply with `!food_out`.
 Order sheet: {}""".format(sheet_link)
         self.send(user_id, message)
 
     @botcmd
-    def tcs_in(self, msg, args):
+    def foos_in(self, msg, args):
         user = msg.frm.nick
         self._add_to_list(user, CONFIRMED)
         self._remove_from_list(user, OPTED_OUT)
         return "Thank you for confirming!"
 
     @botcmd
-    def tcs_out(self, msg, args):
+    def food_out(self, msg, args):
         user = msg.frm.nick
         self._add_to_list(user, OPTED_OUT)
         self._remove_from_list(user, CONFIRMED)
         return "Got it, we'll opt you out if it's not too late."
 
     @botcmd
-    def tcs_status(self, msg, args):
+    def food_status(self, msg, args):
         output = ""
         if self[CONFIRMED]:
             output += "\n* Confirmed orders from: {}".format(", ".join(self[CONFIRMED]))
