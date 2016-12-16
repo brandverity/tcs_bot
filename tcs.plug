@@ -1,9 +1,9 @@
 [Core]
-Name = TCS
+Name = FoodBot
 Module = tcs
 
 [Python]
 Version = 2+
 
 [Documentation]
-Description = TCS bot
+Description = Foodbot bot

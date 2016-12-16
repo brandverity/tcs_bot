@@ -59,7 +59,7 @@ Order sheet: {}""".format(sheet_link)
         self.send(user_id, message)
 
     @botcmd
-    def foos_in(self, msg, args):
+    def food_in(self, msg, args):
         user = msg.frm.nick
         self._add_to_list(user, CONFIRMED)
         self._remove_from_list(user, OPTED_OUT)
