@@ -24,6 +24,8 @@ class TCS(BotPlugin):
         # init persistent storage, chance to set things up the first time the plugin is activated
         self._setup_store()
 
+        self.link = ""
+
     def _setup_store(self):
         if CONFIRMED not in self:
             self[CONFIRMED] = []
@@ -50,12 +52,20 @@ class TCS(BotPlugin):
     @botcmd
     def food_ask(self, msg, args):
         self._reset_store()
-        link = args
+        self.link = args
         users = self.get_missing_rsvps()
         for user in users:
-            self._ask_user_to_confirm(user, link)
+            self._ask_user_to_confirm(user, self.link)
 
         return "Asked {} to confirm.".format(", ".join(users))
+
+    @botcmd
+    def food_nag(self, msg, args):
+        users = self.get_missing_rsvps()
+        for user in users:
+            self._ask_user_to_confirm(user, self.link)
+
+        return "Asked {} missing people to confirm.".format(", ".join(users))
 
     def _ask_user_to_confirm(self, user, sheet_link):
         user_id = self._build_id(user)
